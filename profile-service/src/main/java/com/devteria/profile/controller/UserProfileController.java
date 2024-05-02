@@ -3,7 +3,7 @@ package com.devteria.profile.controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.devteria.profile.dto.request.ProfileCreationRequest;
-import com.devteria.profile.dto.response.UserProfileReponse;
+import com.devteria.profile.dto.response.UserProfileResponse;
 import com.devteria.profile.service.UserProfileService;
 
 import lombok.AccessLevel;
@@ -17,12 +17,12 @@ public class UserProfileController {
     UserProfileService userProfileService;
 
     @PostMapping("/users")
-    UserProfileReponse createProfile(@RequestBody ProfileCreationRequest request) {
+    UserProfileResponse createProfile(@RequestBody ProfileCreationRequest request) {
         return userProfileService.createProfile(request);
     }
 
     @GetMapping("/users/{profileId}")
-    UserProfileReponse getProfile(@PathVariable String profileId) {
+    UserProfileResponse getProfile(@PathVariable String profileId) {
         return userProfileService.getProfile(profileId);
     }
 }
