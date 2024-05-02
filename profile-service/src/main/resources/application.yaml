@@ -3,6 +3,8 @@ server:
   servlet:
     context-path: /profile
 spring:
+  application:
+    name: profile-service
   neo4j:
     uri: bolt://localhost:7687
     authentication:

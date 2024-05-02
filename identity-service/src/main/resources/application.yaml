@@ -4,6 +4,8 @@ server:
     context-path: /identity
 
 spring:
+  application:
+    name: identity-service
   datasource:
     url: "jdbc:mysql://localhost:3306/bookteria_identity"
     driverClassName: "com.mysql.cj.jdbc.Driver"
