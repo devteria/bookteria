@@ -1,6 +1,5 @@
 package com.devteria.identity.configuration;
 
-import java.text.ParseException;
 import java.util.Objects;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.devteria.identity.dto.request.IntrospectRequest;
 import com.devteria.identity.service.AuthenticationService;
-import com.nimbusds.jose.JOSEException;
 
 @Component
 public class CustomJwtDecoder implements JwtDecoder {
