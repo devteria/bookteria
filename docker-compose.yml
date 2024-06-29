@@ -1,7 +1,10 @@
 version: "3"
+name: bookteria
 services:
   kafka:
     image: 'bitnami/kafka:3.7.0'
+    container_name: kafka
+    hostname: kafka
     ports:
       - '9094:9094'
     environment:
