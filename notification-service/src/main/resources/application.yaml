@@ -15,3 +15,8 @@ spring:
       auto-offset-reset: earliest
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+notification:
+  email:
+    brevo-url: https://api.brevo.com
+    brevo-apikey: <key>
