@@ -1,0 +1,879 @@
+{
+	"info": {
+		"_postman_id": "94733646-d947-4bc9-928e-486e8093d3e5",
+		"name": "bookteria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16988973"
+	},
+	"item": [
+		{
+			"name": "Profile service",
+			"item": [
+				{
+					"name": "create Profile (gateway)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"John\",\r\n    \"lastName\": \"Doe\",\r\n    \"city\": \"Ha Noi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/internal/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"internal",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Profile (gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMDk2MDAxMywiaWF0IjoxNzIwOTU2NDEzLCJqdGkiOiI0MTVkOTVlNS1jMDBmLTQ4MGItOGQzZi01MDQwNTYwMzM1YmUiLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.3l0QhYn8tQspeXMwUbMz6YB_E35AN9xsZkQehe-H0Yy6WF2PHqr5WgNLBRMldj2bPk81_gWFdhY78uoWto4Xnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/9419c3ca-6685-4362-8cff-e487c372e68e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"9419c3ca-6685-4362-8cff-e487c372e68e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Profiles (gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMDk2MDAxMywiaWF0IjoxNzIwOTU2NDEzLCJqdGkiOiI0MTVkOTVlNS1jMDBmLTQ4MGItOGQzZi01MDQwNTYwMzM1YmUiLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.3l0QhYn8tQspeXMwUbMz6YB_E35AN9xsZkQehe-H0Yy6WF2PHqr5WgNLBRMldj2bPk81_gWFdhY78uoWto4Xnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Identity service",
+			"item": [
+				{
+					"name": "create User (gateway)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"kafka13\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"kakka13@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/users/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"users",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get token (Gateway)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTg4MzcxMSwiaWF0IjoxNzExODgwMTExLCJzY29wZSI6IiJ9.bQ72do9GpuV_5NmW7CJoIisx53cM3mMeu2mov5Kn5flsW8GT5UhYJV_eNz3uq7kxjojM6e9osn8uzYMz8ugjYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"admin\",\r\n    \"firstName\": \"Admin\",\r\n    \"lastName\": \"Admin\",\r\n    \"dob\": \"1990-09-02\",\r\n    \"roles\": [\r\n        \"ADMIN\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/users/f60c94bf-2caa-4cf0-92d6-fd1cf0e8940e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"users",
+								"f60c94bf-2caa-4cf0-92d6-fd1cf0e8940e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJqYW5lNyIsImV4cCI6MTcxMDU2MDUzMywiaWF0IjoxNzEwNTU2OTMzLCJ1c2VySWQiOiJDdXN0b20ifQ.P5Hgm-lS5KruujlCiMUAWkT8HKuCj6GMSUjPuPGDivC_jotYtpS_dtSwtvK5unGnNu14msZhRL-fOjJ2AqsFgQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/users/d6543cca-14a1-4805-847a-500de211e99b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"users",
+								"d6543cca-14a1-4805-847a-500de211e99b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get User by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJqYW5lMTAiLCJleHAiOjE3MTExNzE4ODIsImlhdCI6MTcxMTE2ODI4Miwic2NvcGUiOiJVU0VSIn0.fIZ0-yTfzT_thtww0iBso8rmr3qmLp7RPiwVasROzeX3vjcI82AIhVRmF2HOo02arKN0XbTdXLp6qM7zN2k8Ig",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/users/18bcec35-7021-4b3d-922d-e977f285ac2d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"users",
+								"18bcec35-7021-4b3d-922d-e977f285ac2d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get MyInfo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjg0NTAwMywiaWF0IjoxNzEyODQxNDAzLCJqdGkiOiJlYTA2NDI3YS1hN2JhLTRiM2QtYjY5NC1kNjE5YTZjODM4NzciLCJzY29wZSI6IlJPTEVfQURNSU4gUkVKRUNUX1BPU1QgQVBQUk9WRV9QT1NUIENSRUFURV9QT1NUIn0.EMScxP_fURoL2gT_pGONnP0sPhlzs9Gh-pEeVbbibz7onUU_OREaBOCXm83TmixZ69Yi8qTZ1Z_peqkaexDClA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/users/myInfo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"users",
+								"myInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get MyInfo (Gateway)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/users/my-info",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"users",
+								"my-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Users (gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJqYW1lMTAiLCJleHAiOjE3MTU2MDg5OTMsImlhdCI6MTcxNTYwNTM5MywianRpIjoiNzhiNjEwOWMtNGIxMi00Y2M0LTk0ZDUtNjU5NzY1NzU1NjE2Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.arF3S5eAS1hayQqnuAoJQNlIBevk7H8YmBGWdQW9MDBEFzzS7b1aTWIEVMk7YToz9BaMBURO0DNn6Tkvaf8Tuw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Users Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJqYW5lIiwiZXhwIjoxNzE1MzUyNjY1LCJpYXQiOjE3MTUzNDkwNjUsImp0aSI6IjRkYThiZWRkLWNlZjQtNGM5OS1hNjhjLTdjOTU3Y2IwYzcyMSIsInNjb3BlIjoiUk9MRV9VU0VSIn0._IUzMK3Pgpy8M7kNC_gqbVMM7y3OOjkQplkRuHwiYehlU_a_ZdPY1xfqwvyuHBnw7L4W5w1Vg1otDK6zsDe1WA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jame10\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/auth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjg0NDk3NywiaWF0IjoxNzEyODQxMzc3LCJqdGkiOiIzOWY2M2NkZS1kYjEzLTQ0M2MtYWMzNi1lNmM5ZTQ1YTI2NWMiLCJzY29wZSI6IlJPTEVfQURNSU4gQ1JFQVRFX1BPU1QgUkVKRUNUX1BPU1QgQVBQUk9WRV9QT1NUIn0.u45JijQoe-JgJjmYwXRhTW73AL6Nx8mYzA0dIUtivqqrOKlEkv0wNs3ZgFqrZRo7oet_x8uT7hP_eUFhxqIFbQ\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "introspect token (gateway)",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjc1ODY1NCwiaWF0IjoxNzEyNzU1MDU0LCJqdGkiOiJkODZlZTgyOC1iYzM5LTQ3ZjYtYTUzYy1iNjJjM2I1YzY3MDgiLCJzY29wZSI6IlJPTEVfQURNSU4gQVBQUk9WRV9QT1NUIFJFSkVDVF9QT1NUIENSRUFURV9QT1NUIn0.LuqhWXRl1xd8s4SnnSMtxBGot0P6KAdd3cbUvkl6YsQK54snYWyr7RaOeWLVgfWcxuksc7P43lpotscIOBqFWw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/identity/auth/introspect",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"identity",
+								"auth",
+								"introspect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxNDgxNjUxOCwiaWF0IjoxNzE0ODEyOTE4LCJqdGkiOiI0OTEwMGIwNi1jNzNkLTQwN2UtYmY4Ny1jZThjNzU2NzBhYzkiLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.ZHXP4IHdggo0Y-vjqhGDal556N3vUWCqyzLq8aXIhuuF8vvqJ1DsdhpE_QtHCbMmjk8fe-EWjLzah1cnydtHZA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTg4NjY2NCwiaWF0IjoxNzExODgzMDY0LCJzY29wZSI6IiJ9.8Pfh79dv-QZqlE9pLKIucRF-4fGqDba0S28ZRvtHN8R98vKoCHY89ZRcmhjl-nEA02dbCV59a3IhEIk0QOcWLQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"REJECT_POST\",\r\n    \"description\": \"Reject a post\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/permissions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTg4NjY2NCwiaWF0IjoxNzExODgzMDY0LCJzY29wZSI6IiJ9.8Pfh79dv-QZqlE9pLKIucRF-4fGqDba0S28ZRvtHN8R98vKoCHY89ZRcmhjl-nEA02dbCV59a3IhEIk0QOcWLQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/permissions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete permission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTgwMDA4MiwiaWF0IjoxNzExNzk2NDgyLCJzY29wZSI6IiJ9.hxJ_MtsDqXJRtZXwVF7jgVFRjHzll2daoaRBwPi8TR3A-ztbCzG247BR6cG4s-QduMEaFuhGdQb8VSYwX7gI6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/permissions/CREATE_DATA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"permissions",
+								"CREATE_DATA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTg4NjY2NCwiaWF0IjoxNzExODgzMDY0LCJzY29wZSI6IiJ9.8Pfh79dv-QZqlE9pLKIucRF-4fGqDba0S28ZRvtHN8R98vKoCHY89ZRcmhjl-nEA02dbCV59a3IhEIk0QOcWLQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"USER\",\r\n    \"description\": \"User role\",\r\n    \"permissions\" : [\"CREATE_POST\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTg4NjY2NCwiaWF0IjoxNzExODgzMDY0LCJzY29wZSI6IiJ9.8Pfh79dv-QZqlE9pLKIucRF-4fGqDba0S28ZRvtHN8R98vKoCHY89ZRcmhjl-nEA02dbCV59a3IhEIk0QOcWLQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/identity/roles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Role",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMTgwMDA4MiwiaWF0IjoxNzExNzk2NDgyLCJzY29wZSI6IiJ9.hxJ_MtsDqXJRtZXwVF7jgVFRjHzll2daoaRBwPi8TR3A-ztbCzG247BR6cG4s-QduMEaFuhGdQb8VSYwX7gI6g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"USER\",\r\n    \"description\": \"User role\",\r\n    \"permissions\" : [\"READ_DATA\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/identity/roles/ADMIN",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"identity",
+								"roles",
+								"ADMIN"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification Service",
+			"item": [
+				{
+					"name": "send email with Brevo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "api-key",
+								"value": "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"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sender\": {\n        \"name\": \"Devteria DotCom\",\n        \"email\": \"devteriadotcom@gmail.com\"\n    },\n    \"replyTo\": {\n        \"name\": \"Devteria DotCom\",\n        \"email\": \"devteriadotcom@gmail.com\"\n    },\n    \"to\": [\n        {\n            \"email\": \"devteriadotcom@yopmail.com\",\n            \"name\": \"John Doe\"\n        }\n    ],\n    \"subject\": \"Hello, welcome to devteria\",\n    \"htmlContent\": \"<html><head></head><body><p>Hello,</p>This is my first transactional email sent from Brevo.</p></body></html>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.brevo.com/v3/smtp/email",
+							"protocol": "https",
+							"host": [
+								"api",
+								"brevo",
+								"com"
+							],
+							"path": [
+								"v3",
+								"smtp",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send email",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMDk2MDAxMywiaWF0IjoxNzIwOTU2NDEzLCJqdGkiOiI0MTVkOTVlNS1jMDBmLTQ4MGItOGQzZi01MDQwNTYwMzM1YmUiLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.3l0QhYn8tQspeXMwUbMz6YB_E35AN9xsZkQehe-H0Yy6WF2PHqr5WgNLBRMldj2bPk81_gWFdhY78uoWto4Xnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "application/json"
+							},
+							{
+								"key": "api-key",
+								"value": "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"
+							},
+							{
+								"key": "content-type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"to\": {\n        \"email\": \"devteriadotcom@yopmail.com\",\n        \"name\": \"John Doe\"\n    },\n    \"subject\": \"Hello, welcome to devteria\",\n    \"htmlContent\": \"<html><head></head><body><p>Hello,</p>Welcome onboard.</p></body></html>\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/notification/email/send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"notification",
+								"email",
+								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
