@@ -1,9 +1,9 @@
-package com.devteria.notification.controller;
+package com.devteria.profile.controller;
 
-import com.devteria.notification.dto.ApiResponse;
-import com.devteria.notification.dto.request.ProfileCreationRequest;
-import com.devteria.notification.dto.response.UserProfileResponse;
-import com.devteria.notification.service.UserProfileService;
+import com.devteria.profile.dto.ApiResponse;
+import com.devteria.profile.dto.request.ProfileCreationRequest;
+import com.devteria.profile.dto.response.UserProfileResponse;
+import com.devteria.profile.service.UserProfileService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -1,13 +1,13 @@
-package com.devteria.notification.service;
+package com.devteria.profile.service;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import com.devteria.notification.dto.request.ProfileCreationRequest;
-import com.devteria.notification.dto.response.UserProfileResponse;
-import com.devteria.notification.entity.UserProfile;
-import com.devteria.notification.mapper.UserProfileMapper;
-import com.devteria.notification.repository.UserProfileRepository;
+import com.devteria.profile.dto.request.ProfileCreationRequest;
+import com.devteria.profile.dto.response.UserProfileResponse;
+import com.devteria.profile.entity.UserProfile;
+import com.devteria.profile.mapper.UserProfileMapper;
+import com.devteria.profile.repository.UserProfileRepository;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

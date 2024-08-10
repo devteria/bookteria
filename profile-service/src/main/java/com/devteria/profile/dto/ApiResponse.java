@@ -1,4 +1,4 @@
-package com.devteria.notification.dto;
+package com.devteria.profile.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AccessLevel;
