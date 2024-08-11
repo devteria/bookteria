@@ -121,7 +121,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"kafka13\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"kakka13@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john123\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -868,6 +868,84 @@
 								"notification",
 								"email",
 								"send"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post Service",
+			"item": [
+				{
+					"name": "create Post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyNzYzNjRmNC1jODliLTQzNGEtODk4Zi1lM2U2MDNjYzIyYTkiLCJleHAiOjE3MjMzNzAwNzgsImlhdCI6MTcyMzM2NjQ3OCwianRpIjoiZDRkZmNiZjEtZTVmNi00NDdjLWJiMTktYzg2OTZkMjhhMTM3Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.BXtwa_LJMhNn2LIun8kNZQFt8z-i8khl8nRAgS7C5h-m7WmK5nI-lcXDgCsmjLYLO-QPHZLb7VrKYzK5N1RZQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"Today I make a video on initializing Post microservice\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/post/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get My Posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyNzYzNjRmNC1jODliLTQzNGEtODk4Zi1lM2U2MDNjYzIyYTkiLCJleHAiOjE3MjMzNzAwNzgsImlhdCI6MTcyMzM2NjQ3OCwianRpIjoiZDRkZmNiZjEtZTVmNi00NDdjLWJiMTktYzg2OTZkMjhhMTM3Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.BXtwa_LJMhNn2LIun8kNZQFt8z-i8khl8nRAgS7C5h-m7WmK5nI-lcXDgCsmjLYLO-QPHZLb7VrKYzK5N1RZQw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/post/my-posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"post",
+								"my-posts"
 							]
 						}
 					},
