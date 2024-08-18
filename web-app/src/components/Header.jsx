@@ -73,6 +73,11 @@ export default function Header() {
     handleMobileMenuClose();
   };
 
+  const handleOpenProfile = () => {
+    setAnchorEl(null);
+    window.location.href = "/profile";
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -100,7 +105,7 @@ export default function Header() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleOpenProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>Settings</MenuItem>
       <MenuItem onClick={handleLogout}>Log Out</MenuItem>
     </Menu>
@@ -166,6 +171,7 @@ export default function Header() {
         color="inherit"
         aria-label="open drawer"
         sx={{ mr: 2 }}
+        onClick={() => (window.location.href = "/")}
       >
         <Box
           component={"img"}
