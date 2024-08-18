@@ -4,12 +4,13 @@ import { Box, Card, CircularProgress, Typography } from "@mui/material";
 import { isAuthenticated } from "../services/authenticationService";
 import Scene from "./Scene";
 import Post from "../components/Post";
-import { getMyPost } from "../services/postService";
+import { getMyPosts } from "../services/postService";
 import { logOut } from "../services/authenticationService";
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
   const observer = useRef();
@@ -26,11 +27,14 @@ export default function Home() {
   }, [navigate, page]);
 
   const loadPosts = (page) => {
+    console.log(`loading posts for page ${page}`);
     setLoading(true);
-    getMyPost(page)
+    getMyPosts(page)
       .then((response) => {
-        setPosts((prevPosts) => [...prevPosts, ...response.data.result]);
-        setHasMore(response.data.result.length > 0);
+        setTotalPages(response.data.result.totalPages);
+        setPosts((prevPosts) => [...prevPosts, ...response.data.result.data]);
+        setHasMore(response.data.result.data.length > 0);
+        console.log("loaded posts:", response.data.result);
       })
       .catch((error) => {
         if (error.response.status === 401) {
@@ -49,7 +53,9 @@ export default function Home() {
     if (observer.current) observer.current.disconnect();
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        setPage((prevPage) => prevPage + 1);
+        if (page < totalPages) {
+          setPage((prevPage) => prevPage + 1);
+        }
       }
     });
     if (lastPostElementRef.current) {

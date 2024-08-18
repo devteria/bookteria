@@ -2,7 +2,7 @@ import httpClient from "../configurations/httpClient";
 import { API } from "../configurations/configuration";
 import { getToken } from "./localStorageService";
 
-export const getMyPost = async (page) => {
+export const getMyPosts = async (page) => {
   return await httpClient
     .get(API.MY_POST, {
       headers: {
