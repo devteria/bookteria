@@ -34,17 +34,17 @@ public class DateTimeFormatter {
 
     private String formatInSeconds(Instant instant){
         long elapseSeconds = ChronoUnit.SECONDS.between(instant, Instant.now());
-        return String.format("%s seconds", elapseSeconds);
+        return String.format("%s second(s) ago", elapseSeconds);
     }
 
     private String formatInMinutes(Instant instant){
         long elapseMinutes = ChronoUnit.MINUTES.between(instant, Instant.now());
-        return String.format("%s minutes", elapseMinutes);
+        return String.format("%s minute(s) ago", elapseMinutes);
     }
 
     private String formatInHours(Instant instant){
         long elapseHours = ChronoUnit.HOURS.between(instant, Instant.now());
-        return String.format("%s hours", elapseHours);
+        return String.format("%s hour(s) ago", elapseHours);
     }
 
     private String formatInDate(Instant instant){
