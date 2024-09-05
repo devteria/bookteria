@@ -23,7 +23,7 @@ const Post = forwardRef((props, ref) => {
       >
         <Avatar src={avatarUrl} sx={{ marginRight: 2 }} />
         <Box>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box sx={{ display: "flex", flexDirection: "row", gap: "10px" }}>
             <Typography
               sx={{
                 fontSize: 14,
