@@ -7,19 +7,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class PostResponse {
+public class UserProfileResponse {
     String id;
-    String content;
-    String userId;
     String username;
-    String created;
-    Instant createdDate;
-    Instant modifiedDate;
+    String email;
+    String firstName;
+    String lastName;
+    LocalDate dob;
+    String city;
 }
