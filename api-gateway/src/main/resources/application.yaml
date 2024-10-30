@@ -34,3 +34,9 @@ spring:
             - Path=${app.api-prefix}/post/**
           filters:
             - StripPrefix=2
+        - id: file_service
+          uri: http://localhost:8084
+          predicates:
+            - Path=${app.api-prefix}/file/**
+          filters:
+            - StripPrefix=2
