@@ -16,7 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private static final String[] PUBLIC_ENDPOINTS = {};
+    private static final String[] PUBLIC_ENDPOINTS = {
+            "/media/upload"
+    };
 
     private final CustomJwtDecoder customJwtDecoder;
 
