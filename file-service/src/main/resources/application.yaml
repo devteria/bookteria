@@ -8,3 +8,8 @@ spring:
   data:
     mongodb:
       uri: mongodb://root:root@localhost:27017/file-service?authSource=admin
+
+app:
+  file:
+    storage-dir: C:/upload
+    download-prefix: http://localhost:8888/api/v1/file/media/
