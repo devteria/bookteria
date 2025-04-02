@@ -121,7 +121,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john123\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"john123@yopmail.com\",\r\n    \"firstName\": \"Jame4\",\r\n    \"lastName\": \"Bond\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"john@yopmail.com\",\r\n    \"firstName\": \"john\",\r\n    \"lastName\": \"Doe\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,7 +153,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -438,7 +438,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"jame10\",\r\n    \"password\": \"12345678\"\r\n}",
+							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -927,7 +927,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiIyNzYzNjRmNC1jODliLTQzNGEtODk4Zi1lM2U2MDNjYzIyYTkiLCJleHAiOjE3MjMzNzAwNzgsImlhdCI6MTcyMzM2NjQ3OCwianRpIjoiZDRkZmNiZjEtZTVmNi00NDdjLWJiMTktYzg2OTZkMjhhMTM3Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.BXtwa_LJMhNn2LIun8kNZQFt8z-i8khl8nRAgS7C5h-m7WmK5nI-lcXDgCsmjLYLO-QPHZLb7VrKYzK5N1RZQw",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjODI5OTFlMS01YjU3LTRiODItYTBlMi0yMDZjYmY5ZGY3Y2EiLCJleHAiOjE3MjM5NzIyNzksImlhdCI6MTcyMzk2ODY3OSwianRpIjoiNmY3NmNiNjctYjFiNC00ZjJjLWE0MWQtM2M4ZTg2OTU3MjI4Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.o34DPve53GBLzKg5a9N-FSZwW_JIyNrdSeQGRI-VW1mu6bDzomqeUBgqNMB0M5Sa6OfrfSkyy5kenFwJ0RXczw",
 									"type": "string"
 								}
 							]
@@ -935,7 +935,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8888/api/v1/post/my-posts",
+							"raw": "http://localhost:8888/api/v1/post/my-posts?page=1&size=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -946,6 +946,128 @@
 								"v1",
 								"post",
 								"my-posts"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "File",
+			"item": [
+				{
+					"name": "upload Media File",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/devteria/Pictures/Screenshots/Screenshot 2025-03-16 153906.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8084/file/media/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"file",
+								"media",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDMyNDE1MDIsImlhdCI6MTc0MzIzNzkwMiwianRpIjoiMjNmZTY3ZTYtYzkzYS00ZWVjLWEzMzEtMjVkMTU3MTYyZmI3Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.PJxgcHY5lGRDg9P3ikxkWIF7SDOnutppinlysB6BrDxh76YKiC5CK9k-hHgVVDtFg_cvjmqAoxV7Bljh3Za7lg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/devteria/Pictures/Screenshots/Screenshot 2025-03-16 153906.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/file/media/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"file",
+								"media",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download File",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDMyNDE1MDIsImlhdCI6MTc0MzIzNzkwMiwianRpIjoiMjNmZTY3ZTYtYzkzYS00ZWVjLWEzMzEtMjVkMTU3MTYyZmI3Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.PJxgcHY5lGRDg9P3ikxkWIF7SDOnutppinlysB6BrDxh76YKiC5CK9k-hHgVVDtFg_cvjmqAoxV7Bljh3Za7lg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/api/v1/file/media/fe4b28cf-2d70-4e51-a73e-b77c9801e32f.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"file",
+								"media",
+								"fe4b28cf-2d70-4e51-a73e-b77c9801e32f.png"
 							]
 						}
 					},
