@@ -11,7 +11,6 @@ import {
   Button,
   Snackbar,
   Alert,
-  IconButton,
   Tooltip,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -30,9 +29,10 @@ import Scene from "./Scene";
 export default function Profile() {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({});
-  const [editing, setEditing] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
   const [dob, setDob] = useState(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -49,6 +49,8 @@ export default function Profile() {
       // Initialize form fields with current values
       setFirstName(data.result.firstName || "");
       setLastName(data.result.lastName || "");
+      setEmail(data.result.email || "");
+      setCity(data.result.city || "");
       setDob(data.result.dob ? dayjs(data.result.dob) : null);
     } catch (error) {
       if (error.response?.status === 401) {
@@ -58,32 +60,18 @@ export default function Profile() {
     }
   };
 
-  // Add functions for handling edit mode and form submission
-  const handleEdit = () => {
-    setEditing(true);
-  };
-
-  const handleCancel = () => {
-    // Reset form fields to original values
-    setFirstName(userDetails.firstName || "");
-    setLastName(userDetails.lastName || "");
-    setDob(userDetails.dob ? dayjs(userDetails.dob) : null);
-    setEditing(false);
-  };
-
-  const handleSave = async () => {
+  const handleUpdate = async () => {
     try {
       // Prepare the data for update
       const profileData = {
         firstName,
         lastName,
+        email,
+        city,
         dob: dob ? dob.format("YYYY-MM-DD") : null,
       };
 
-      // In a real application, this would call the backend API
-      // For now, we'll still update the local state and assume success
-      // When your backend is ready, uncomment the following line:
-      // await updateProfile(profileData);
+      await updateProfile(profileData);
 
       const updatedDetails = {
         ...userDetails,
@@ -91,7 +79,6 @@ export default function Profile() {
       };
 
       setUserDetails(updatedDetails);
-      setEditing(false);
 
       // Show success message
       setSnackbarMessage("Profile updated successfully!");
@@ -129,19 +116,18 @@ export default function Profile() {
 
       // Create FormData object
       const formData = new FormData();
-      formData.append("avatar", file);
+      formData.append("file", file);
 
       // Upload the image
-      // When your backend is ready, uncomment the following line:
-      // const response = await uploadAvatar(formData);
+      const response = await uploadAvatar(formData);
 
       // For demo purposes, create a local URL for the image
-      const imageUrl = URL.createObjectURL(file);
+      const imageUrl = response.data.result.avatar;
 
       // Update user details with the new avatar URL
       setUserDetails({
         ...userDetails,
-        avatarUrl: imageUrl,
+        avatar: imageUrl,
       });
 
       // Success message
@@ -222,7 +208,7 @@ export default function Profile() {
               <Tooltip title="Click to upload a profile picture">
                 <Box sx={{ position: "relative" }}>
                   <Avatar
-                    src={userDetails.avatarUrl}
+                    src={userDetails.avatar}
                     sx={{
                       width: 120,
                       height: 120,
@@ -297,41 +283,6 @@ export default function Profile() {
               >
                 {userDetails.username}
               </Typography>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: 2,
-                  justifyContent: "center",
-                  width: "100%",
-                }}
-              >
-                {!editing ? (
-                  <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={handleEdit}
-                  >
-                    Edit Profile
-                  </Button>
-                ) : (
-                  <>
-                    <Button
-                      variant="outlined"
-                      color="error"
-                      onClick={handleCancel}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleSave}
-                    >
-                      Save
-                    </Button>
-                  </>
-                )}
-              </Box>
               <Divider sx={{ width: "100%", mb: "10px" }} />
             </Box>
             <Typography
@@ -384,22 +335,12 @@ export default function Profile() {
               >
                 First Name
               </Typography>
-              {editing ? (
-                <TextField
-                  size="small"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  sx={{ width: "60%" }}
-                />
-              ) : (
-                <Typography
-                  sx={{
-                    fontSize: 14,
-                  }}
-                >
-                  {userDetails.firstName}
-                </Typography>
-              )}
+              <TextField
+                size="small"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                sx={{ width: "60%" }}
+              />
             </Box>
             <Box
               sx={{
@@ -418,22 +359,61 @@ export default function Profile() {
               >
                 Last Name
               </Typography>
-              {editing ? (
-                <TextField
-                  size="small"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  sx={{ width: "60%" }}
-                />
-              ) : (
-                <Typography
-                  sx={{
-                    fontSize: 14,
-                  }}
-                >
-                  {userDetails.lastName}
-                </Typography>
-              )}
+              <TextField
+                size="small"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                sx={{ width: "60%" }}
+              />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  fontWeight: 600,
+                }}
+              >
+                Email
+              </Typography>
+              <TextField
+                size="small"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                sx={{ width: "60%" }}
+                type="email"
+              />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: 14,
+                  fontWeight: 600,
+                }}
+              >
+                City
+              </Typography>
+              <TextField
+                size="small"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                sx={{ width: "60%" }}
+              />
             </Box>
             <Box
               sx={{
@@ -452,24 +432,31 @@ export default function Profile() {
               >
                 Date of birth
               </Typography>
-              {editing ? (
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker
-                    value={dob}
-                    onChange={(newValue) => setDob(newValue)}
-                    slotProps={{ textField: { size: "small" } }}
-                    sx={{ width: "60%" }}
-                  />
-                </LocalizationProvider>
-              ) : (
-                <Typography
-                  sx={{
-                    fontSize: 14,
-                  }}
-                >
-                  {userDetails.dob}
-                </Typography>
-              )}
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  value={dob}
+                  onChange={(newValue) => setDob(newValue)}
+                  slotProps={{ textField: { size: "small" } }}
+                  sx={{ width: "60%" }}
+                />
+              </LocalizationProvider>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+                mt: 3,
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleUpdate}
+                sx={{ px: 4 }}
+              >
+                Update Profile
+              </Button>
             </Box>
           </Box>
         </Card>

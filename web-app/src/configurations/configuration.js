@@ -6,5 +6,6 @@ export const API = {
   LOGIN: "/identity/auth/token",
   MY_INFO: "/profile/users/my-profile",
   MY_POST: "/post/my-posts",
-  UPDATE_PROFILE: "/profile/users/update-profile",
+  UPDATE_PROFILE: "/profile/users/my-profile",
+  UPDATE_AVATAR: "/profile/users/avatar",
 };

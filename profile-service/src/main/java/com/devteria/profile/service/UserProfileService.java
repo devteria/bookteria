@@ -1,5 +1,6 @@
 package com.devteria.profile.service;
 
+import com.devteria.profile.dto.request.UpdateProfileRequest;
 import com.devteria.profile.exception.AppException;
 import com.devteria.profile.exception.ErrorCode;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,7 +32,7 @@ public class UserProfileService {
         UserProfile userProfile = userProfileMapper.toUserProfile(request);
         userProfile = userProfileRepository.save(userProfile);
 
-        return userProfileMapper.toUserProfileReponse(userProfile);
+        return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
     public UserProfileResponse getByUserId(String userId) {
@@ -39,7 +40,7 @@ public class UserProfileService {
                 userProfileRepository.findByUserId(userId)
                         .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        return userProfileMapper.toUserProfileReponse(userProfile);
+        return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
     public UserProfileResponse getProfile(String id) {
@@ -47,14 +48,14 @@ public class UserProfileService {
                 userProfileRepository.findById(id).orElseThrow(
                         () -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        return userProfileMapper.toUserProfileReponse(userProfile);
+        return userProfileMapper.toUserProfileResponse(userProfile);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     public List<UserProfileResponse> getAllProfiles() {
         var profiles = userProfileRepository.findAll();
 
-        return profiles.stream().map(userProfileMapper::toUserProfileReponse).toList();
+        return profiles.stream().map(userProfileMapper::toUserProfileResponse).toList();
     }
 
     public UserProfileResponse getMyProfile() {
@@ -64,6 +65,18 @@ public class UserProfileService {
         var profile = userProfileRepository.findByUserId(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
-        return userProfileMapper.toUserProfileReponse(profile);
+        return userProfileMapper.toUserProfileResponse(profile);
+    }
+
+    public UserProfileResponse updateMyProfile(UpdateProfileRequest request) {
+        var authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+        var profile = userProfileRepository.findByUserId(userId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        userProfileMapper.update(profile, request);
+
+        return userProfileMapper.toUserProfileResponse(userProfileRepository.save(profile));
     }
 }
