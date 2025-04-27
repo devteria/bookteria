@@ -10,3 +10,6 @@ spring:
     authentication:
       username: neo4j
       password: 12345678
+app:
+  services:
+    file: http://localhost:8084
