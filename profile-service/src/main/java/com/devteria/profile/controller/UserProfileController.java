@@ -1,6 +1,7 @@
 package com.devteria.profile.controller;
 
 import com.devteria.profile.dto.ApiResponse;
+import com.devteria.profile.dto.request.SearchUserRequest;
 import com.devteria.profile.dto.request.UpdateProfileRequest;
 import com.devteria.profile.dto.response.UserProfileResponse;
 import com.devteria.profile.service.UserProfileService;
@@ -51,6 +52,13 @@ public class UserProfileController {
     ApiResponse<UserProfileResponse> updateAvatar(@RequestParam("file") MultipartFile file) {
         return ApiResponse.<UserProfileResponse>builder()
                 .result(userProfileService.updateAvatar(file))
+                .build();
+    }
+
+    @PostMapping("/users/search")
+    ApiResponse<List<UserProfileResponse>> search(@RequestBody SearchUserRequest request) {
+        return ApiResponse.<List<UserProfileResponse>>builder()
+                .result(userProfileService.search(request))
                 .build();
     }
 }
