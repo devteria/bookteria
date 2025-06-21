@@ -1,5 +1,6 @@
 package com.devteria.chat.dto.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -9,6 +10,9 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ChatMessageRequest {
+    @NotBlank
     String conversationId;
+
+    @NotBlank
     String message;
 }
