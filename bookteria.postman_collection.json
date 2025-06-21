@@ -75,7 +75,7 @@
 					"response": []
 				},
 				{
-					"name": "get All Profiles (gateway)",
+					"name": "update Profile (gateway)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -83,6 +83,91 @@
 								{
 									"key": "token",
 									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcyMDk2MDAxMywiaWF0IjoxNzIwOTU2NDEzLCJqdGkiOiI0MTVkOTVlNS1jMDBmLTQ4MGItOGQzZi01MDQwNTYwMzM1YmUiLCJzY29wZSI6IlJPTEVfQURNSU4ifQ.3l0QhYn8tQspeXMwUbMz6YB_E35AN9xsZkQehe-H0Yy6WF2PHqr5WgNLBRMldj2bPk81_gWFdhY78uoWto4Xnw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/my-profiles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"my-profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Avatar (gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDU2Njg4NTMsImlhdCI6MTc0NTY2NTI1MywianRpIjoiY2MzNjU1NDgtNmQ3MS00NWM5LTk0ZTYtMzQ0YWI4NDE2ZTAwIiwic2NvcGUiOiJST0xFX1VTRVIifQ.b-2uONpUeIMF1Ea1IXcGgr_WVR9yr0ch2U2OsXm8uRnxJI81P0NdW3PXBMIPKzN_rMMcc4u6PgWefYmEqpGjWw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/devteria/Pictures/Screenshots/Screenshot 2025-03-16 153726.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/avatar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Profiles (gateway)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDk5ODM2NTcsImlhdCI6MTc0OTk4MDA1NywianRpIjoiMTQ0ODA1YzctNDNiYi00ZjI1LWI5MGYtNmJhMjJlOTZlYzVlIiwic2NvcGUiOiJST0xFX1VTRVIifQ.cevs0XY1-_RuxrlWYD74ZQEuv0Wxto9VgK4XCvUFv28_GJaOZWNsDDbdvkYbcF_n8hEySG6LKetmIo0EsjFuPg",
 									"type": "string"
 								}
 							]
@@ -105,6 +190,48 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "search User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDk5ODM2NTcsImlhdCI6MTc0OTk4MDA1NywianRpIjoiMTQ0ODA1YzctNDNiYi00ZjI1LWI5MGYtNmJhMjJlOTZlYzVlIiwic2NvcGUiOiJST0xFX1VTRVIifQ.cevs0XY1-_RuxrlWYD74ZQEuv0Wxto9VgK4XCvUFv28_GJaOZWNsDDbdvkYbcF_n8hEySG6LKetmIo0EsjFuPg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"keyword\": \"a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/profile/users/search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"users",
+								"search"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -121,7 +248,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"john@yopmail.com\",\r\n    \"firstName\": \"john\",\r\n    \"lastName\": \"Doe\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
+							"raw": "{\r\n    \"username\": \"taylor\",\r\n    \"password\": \"12345678\",\r\n    \"email\": \"taylor@yopmail.com\",\r\n    \"firstName\": \"Taylor\",\r\n    \"lastName\": \"Swift\",\r\n    \"dob\": \"2000-04-08\",\r\n    \"city\" : \"London\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1005,7 +1132,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDMyNDE1MDIsImlhdCI6MTc0MzIzNzkwMiwianRpIjoiMjNmZTY3ZTYtYzkzYS00ZWVjLWEzMzEtMjVkMTU3MTYyZmI3Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.PJxgcHY5lGRDg9P3ikxkWIF7SDOnutppinlysB6BrDxh76YKiC5CK9k-hHgVVDtFg_cvjmqAoxV7Bljh3Za7lg",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NDM2MDE3MzksImlhdCI6MTc0MzU5ODEzOSwianRpIjoiNjA0OGY2Y2MtZDlhZS00NzZkLTllMjEtMTIwNzNkY2JjMWY1Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.hdvATlNpExdBqHTFSVHWzNI9n8vFQ_G01vRuCwLOaK39L5nwPP0xwtbh-rgyU6wBwx0PFD98gv17sDZHw7AiRw",
 									"type": "string"
 								}
 							]
@@ -1018,7 +1145,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/devteria/Pictures/Screenshots/Screenshot 2025-03-16 153906.png"
+									"src": "/C:/Users/devteria/Pictures/Screenshots/Screenshot 2025-03-30 174329.png"
 								}
 							]
 						},
@@ -1068,6 +1195,180 @@
 								"file",
 								"media",
 								"fe4b28cf-2d70-4e51-a73e-b77c9801e32f.png"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "create Conversation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NTA1MTc2NTAsImlhdCI6MTc1MDUxNDA1MCwianRpIjoiZmJjMmI1NGUtZGY3Ni00ZjhkLTlhOTgtNDRhZTIwYjMxYzhiIiwic2NvcGUiOiJST0xFX1VTRVIifQ.nkK8dnNmHBJ5U2SqxFCk8aj377T-nBvNTiOJNh_LxAW0nBUTEukIDLN26cjNjP16Mg44thBXLATJ3F-m-5JjdA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"DIRECT\",\r\n    \"participantIds\": [\r\n        \"0208fe0f-ba07-4ed9-9637-e54d07796f2d\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/chat/conversations/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"conversations",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Conversations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NTA1MTc2NTAsImlhdCI6MTc1MDUxNDA1MCwianRpIjoiZmJjMmI1NGUtZGY3Ni00ZjhkLTlhOTgtNDRhZTIwYjMxYzhiIiwic2NvcGUiOiJST0xFX1VTRVIifQ.nkK8dnNmHBJ5U2SqxFCk8aj377T-nBvNTiOJNh_LxAW0nBUTEukIDLN26cjNjP16Mg44thBXLATJ3F-m-5JjdA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjc1ODY1NCwiaWF0IjoxNzEyNzU1MDU0LCJqdGkiOiJkODZlZTgyOC1iYzM5LTQ3ZjYtYTUzYy1iNjJjM2I1YzY3MDgiLCJzY29wZSI6IlJPTEVfQURNSU4gQVBQUk9WRV9QT1NUIFJFSkVDVF9QT1NUIENSRUFURV9QT1NUIn0.LuqhWXRl1xd8s4SnnSMtxBGot0P6KAdd3cbUvkl6YsQK54snYWyr7RaOeWLVgfWcxuksc7P43lpotscIOBqFWw\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/chat/conversations/my-conversations",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"conversations",
+								"my-conversations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create Messages",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NTA1MTkzNTQsImlhdCI6MTc1MDUxNTc1NCwianRpIjoiYmFiZTA0MzQtMzM0NS00MWMyLTlkMmEtMTA3OWIxODJlMTA2Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.ezpJwzkG1u7CVNFD3X6lxWQ2UmGbjLPglyf2ZGZYnXgufj_oRcSBzlhdvAqgmD3DHGulu_NPbZUp23ApeoXGLQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"conversationId\": \"6856a524e2e032cac2dfc7a2\",\r\n    \"message\": \"Chao James\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/chat/messages/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"messages",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Chat Messages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJjZTlhNTlhNC1jMTIxLTQxNzgtOGYyZi05MDVkZjkzYzU3MzAiLCJleHAiOjE3NTA1MTkzNTQsImlhdCI6MTc1MDUxNTc1NCwianRpIjoiYmFiZTA0MzQtMzM0NS00MWMyLTlkMmEtMTA3OWIxODJlMTA2Iiwic2NvcGUiOiJST0xFX1VTRVIifQ.ezpJwzkG1u7CVNFD3X6lxWQ2UmGbjLPglyf2ZGZYnXgufj_oRcSBzlhdvAqgmD3DHGulu_NPbZUp23ApeoXGLQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkZXZ0ZXJpYS5jb20iLCJzdWIiOiJhZG1pbiIsImV4cCI6MTcxMjc1ODY1NCwiaWF0IjoxNzEyNzU1MDU0LCJqdGkiOiJkODZlZTgyOC1iYzM5LTQ3ZjYtYTUzYy1iNjJjM2I1YzY3MDgiLCJzY29wZSI6IlJPTEVfQURNSU4gQVBQUk9WRV9QT1NUIFJFSkVDVF9QT1NUIENSRUFURV9QT1NUIn0.LuqhWXRl1xd8s4SnnSMtxBGot0P6KAdd3cbUvkl6YsQK54snYWyr7RaOeWLVgfWcxuksc7P43lpotscIOBqFWw\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8888/api/v1/chat/messages?conversationId=6856a524e2e032cac2dfc7a2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "conversationId",
+									"value": "6856a524e2e032cac2dfc7a2"
+								}
 							]
 						}
 					},
