@@ -1,6 +1,5 @@
 package com.devteria.chat.service;
 
-import com.corundumstudio.socketio.SocketIOServer;
 import com.devteria.chat.dto.request.ChatMessageRequest;
 import com.devteria.chat.dto.response.ChatMessageResponse;
 import com.devteria.chat.entity.ChatMessage;
@@ -11,7 +10,6 @@ import com.devteria.chat.mapper.ChatMessageMapper;
 import com.devteria.chat.repository.ChatMessageRepository;
 import com.devteria.chat.repository.ConversationRepository;
 import com.devteria.chat.repository.httpclient.ProfileClient;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -31,7 +29,6 @@ public class ChatMessageService {
     ChatMessageRepository chatMessageRepository;
     ConversationRepository conversationRepository;
     ProfileClient profileClient;
-    SocketIOServer server;
 
     ChatMessageMapper chatMessageMapper;
 
@@ -82,11 +79,6 @@ public class ChatMessageService {
 
         // Create chat message
         chatMessage = chatMessageRepository.save(chatMessage);
-        String message = chatMessage.toString();
-        server.getAllClients().forEach(socketIOClient -> {
-            log.info("Broadcast message to: {}", socketIOClient.getSessionId());
-            socketIOClient.sendEvent("message", message);
-        });
 
         // convert to Response
         return toChatMessageResponse(chatMessage);

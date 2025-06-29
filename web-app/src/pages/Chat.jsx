@@ -28,6 +28,7 @@ import {
   getMessages,
   createMessage,
 } from "../services/chatService";
+import { io } from "socket.io-client";
 
 export default function Chat() {
   const [message, setMessage] = useState("");
@@ -121,7 +122,7 @@ export default function Chat() {
       setSelectedConversation(conversations[0]);
     }
   }, [conversations, selectedConversation]);
-  
+
   // Load messages from the conversation history when a conversation is selected
   useEffect(() => {
     const fetchMessages = async (conversationId) => {
@@ -173,10 +174,35 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [selectedConversation, scrollToBottom]);
+  
+  useEffect(() => {
+    // Initialize socket connection
+    console.log("Initializing socket connection...");
+    const socket = new io("http://localhost:8099");
+    
+    socket.on("connect", () => {
+      console.log("Socket connected");
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected");
+    });
+
+    socket.on("message", (message) => {
+      console.log("New message received:", message);
+    });
+
+    // Cleanup function - disconnect socket when component unmounts
+    return () => {
+      console.log("Disconnecting socket...");
+      socket.disconnect();
+    };
+  }, []);
 
   const handleConversationSelect = (conversation) => {
     setSelectedConversation(conversation);
   };
+
   const handleSendMessage = async () => {
     if (!message.trim() || !selectedConversation) return;
 
@@ -485,7 +511,6 @@ export default function Chat() {
                   display: "flex",
                   flexDirection: "column",
                   position: "relative",
-
                 }}
               >
                 {" "}
