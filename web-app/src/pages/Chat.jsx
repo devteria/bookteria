@@ -29,6 +29,7 @@ import {
   createMessage,
 } from "../services/chatService";
 import { io } from "socket.io-client";
+import { getToken } from "../services/localStorageService";
 
 export default function Chat() {
   const [message, setMessage] = useState("");
@@ -178,7 +179,10 @@ export default function Chat() {
   useEffect(() => {
     // Initialize socket connection
     console.log("Initializing socket connection...");
-    const socket = new io("http://localhost:8099");
+
+    const connectionUrl = "http://localhost:8099?token=" + getToken();
+
+    const socket = new io(connectionUrl);
     
     socket.on("connect", () => {
       console.log("Socket connected");
