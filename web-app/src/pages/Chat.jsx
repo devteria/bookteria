@@ -39,7 +39,8 @@ export default function Chat() {
   const [error, setError] = useState(null);
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [messagesMap, setMessagesMap] = useState({});
-  const messageContainerRef = useRef(null); // Function to scroll to the bottom of the message container
+  const messageContainerRef = useRef(null);
+  const socketRef = useRef(null); // Function to scroll to the bottom of the message container
   const scrollToBottom = useCallback(() => {
     if (messageContainerRef.current) {
       // Immediate scroll attempt
@@ -175,33 +176,60 @@ export default function Chat() {
   useEffect(() => {
     scrollToBottom();
   }, [selectedConversation, scrollToBottom]);
-  
+
   useEffect(() => {
-    // Initialize socket connection
-    console.log("Initializing socket connection...");
+    // Initialize socket connection only once
+    if (!socketRef.current) {
+      console.log("Initializing socket connection...");
 
-    const connectionUrl = "http://localhost:8099?token=" + getToken();
+      const connectionUrl = "http://localhost:8099?token=" + getToken();
 
-    const socket = new io(connectionUrl);
-    
-    socket.on("connect", () => {
-      console.log("Socket connected");
-    });
+      socketRef.current = new io(connectionUrl);
 
-    socket.on("disconnect", () => {
-      console.log("Socket disconnected");
-    });
+      socketRef.current.on("connect", () => {
+        console.log("Socket connected");
+      });
 
-    socket.on("message", (message) => {
-      console.log("New message received:", message);
-    });
+      socketRef.current.on("disconnect", () => {
+        console.log("Socket disconnected");
+      });
+
+      socketRef.current.on("message", (message) => {
+        console.log("New message received:", message);
+
+        /*
+        const messageObject = JSON.parse(message);
+        console.log("Parsed message object:", messageObject);
+
+        // Update messages in the UI when a new message is received
+        if (messageObject?.conversationId) {
+          handleIncomingMessage(messageObject);
+        }
+        */
+      });
+    }
 
     // Cleanup function - disconnect socket when component unmounts
     return () => {
-      console.log("Disconnecting socket...");
-      socket.disconnect();
+      if (socketRef.current) {
+        console.log("Disconnecting socket...");
+        socketRef.current.disconnect();
+        socketRef.current = null;
+      }
     };
   }, []);
+
+  // Update unread count when conversation is selected
+  useEffect(() => {
+    if (selectedConversation?.id && socketRef.current) {
+      // Mark the currently selected conversation as read
+      setConversations((prevConversations) =>
+        prevConversations.map((conv) =>
+          conv.id === selectedConversation.id ? { ...conv, unread: 0 } : conv
+        )
+      );
+    }
+  }, [selectedConversation]);
 
   const handleConversationSelect = (conversation) => {
     setSelectedConversation(conversation);
@@ -209,35 +237,6 @@ export default function Chat() {
 
   const handleSendMessage = async () => {
     if (!message.trim() || !selectedConversation) return;
-
-    const tempId = `temp-${Date.now()}`;
-    const newMessage = {
-      id: tempId,
-      content: message,
-      timestamp: new Date().toISOString(),
-      me: true,
-      pending: true,
-    }; // Optimistically update UI with the new message (append to the end for chronological order)
-    setMessagesMap((prev) => ({
-      ...prev,
-      [selectedConversation.id]: [
-        ...(prev[selectedConversation.id] || []),
-        newMessage,
-      ],
-    }));
-
-    // Update last message in conversation list
-    setConversations((prevConversations) =>
-      prevConversations.map((conv) =>
-        conv.id === selectedConversation.id
-          ? {
-              ...conv,
-              lastMessage: message,
-              lastTimestamp: new Date().toLocaleString(),
-            }
-          : conv
-      )
-    );
 
     // Clear input field
     setMessage("");
@@ -248,39 +247,67 @@ export default function Chat() {
         conversationId: selectedConversation.id,
         message: message,
       });
+    } catch (error) {
+      console.error("Failed to send message:", error);
+    }
+  };
 
-      if (response?.data?.result) {
-        // Replace temporary message with the one from the server
-        setMessagesMap((prev) => {
-          const updatedMessages = prev[selectedConversation.id].filter(
-            (msg) => msg.id !== tempId
+  // Helper function to handle incoming socket messages
+  const handleIncomingMessage = useCallback(
+    (message) => {
+  
+      // Add the new message to the appropriate conversation
+      setMessagesMap((prev) => {
+        const existingMessages = prev[message.conversationId] || [];
+
+        // Check if message already exists to avoid duplicates
+        const messageExists = existingMessages.some((msg) => {
+          // Primary: Compare by ID if both messages have IDs
+          if (msg.id && message.id) {
+            return msg.id === message.id;
+          }
+          
+          return false;
+        });
+
+        if (!messageExists) {
+          const updatedMessages = [...existingMessages, message].sort(
+            (a, b) => new Date(a.createdDate) - new Date(b.createdDate)
           );
 
           return {
             ...prev,
-            [selectedConversation.id]: [
-              ...updatedMessages,
-              response.data.result,
-            ].sort((a, b) => new Date(a.createdDate) - new Date(b.createdDate)),
+            [message.conversationId]: updatedMessages,
           };
-        });
-      }
-    } catch (error) {
-      console.error("Failed to send message:", error);
+        }
 
-      // Mark message as failed
-      setMessagesMap((prev) => {
-        const updatedMessages = prev[selectedConversation.id].map((msg) =>
-          msg.id === tempId ? { ...msg, failed: true, pending: false } : msg
-        );
-
-        return {
-          ...prev,
-          [selectedConversation.id]: updatedMessages,
-        };
+        console.log("Message already exists, not adding");
+        return prev;
       });
-    }
-  };
+
+      // Update the conversation list with the new last message
+      setConversations((prevConversations) => {        
+        const updatedConversations = prevConversations.map((conv) =>
+          conv.id === message.conversationId
+            ? {
+                ...conv,
+                lastMessage: message.message,
+                lastTimestamp: new Date(message.createdDate).toLocaleString(),
+                unread:
+                  selectedConversation?.id === message.conversationId
+                    ? 0
+                    : (conv.unread || 0) + 1,
+                modifiedDate: message.createdDate,
+              }
+            : conv
+        );
+        
+        return updatedConversations;
+      });
+    },
+    [selectedConversation]
+  );
+
   return (
     <Scene>
       <Card
@@ -527,84 +554,88 @@ export default function Chat() {
                       "auto 0 0 0" /* Push to bottom, but allow scrolling */,
                   }}
                 >
-                  {currentMessages.map((msg) => (
-                    <Box
-                      key={msg.id}
-                      sx={{
-                        display: "flex",
-                        justifyContent: msg.me ? "flex-end" : "flex-start",
-                        mb: 2,
-                      }}
-                    >
-                      {!msg.me && (
-                        <Avatar
-                          src={msg.sender?.avatar}
-                          sx={{
-                            mr: 1,
-                            alignSelf: "flex-end",
-                            width: 32,
-                            height: 32,
-                          }}
-                        />
-                      )}
-                      <Paper
-                        elevation={1}
+                  {currentMessages.map((msg) => {
+                    // Extract background color logic to avoid nested ternary
+                    let backgroundColor = "#f5f5f5"; // default for others
+                    if (msg.me) {
+                      backgroundColor = msg.failed ? "#ffebee" : "#e3f2fd";
+                    }
+
+                    return (
+                      <Box
+                        key={msg.id}
                         sx={{
-                          p: 2,
-                          maxWidth: "70%",
-                          backgroundColor: msg.me
-                            ? msg.failed
-                              ? "#ffebee"
-                              : "#e3f2fd"
-                            : "#f5f5f5",
-                          borderRadius: 2,
-                          opacity: msg.pending ? 0.7 : 1,
+                          display: "flex",
+                          justifyContent: msg.me ? "flex-end" : "flex-start",
+                          mb: 2,
                         }}
                       >
-                        <Typography variant="body1">{msg.message}</Typography>
-                        <Stack
-                          direction="row"
-                          spacing={1}
-                          alignItems="center"
-                          justifyContent="flex-end"
-                          sx={{ mt: 1 }}
-                        >
-                          {msg.failed && (
-                            <Typography variant="caption" color="error">
-                              Failed to send
-                            </Typography>
-                          )}
-                          {msg.pending && (
-                            <Typography
-                              variant="caption"
-                              color="text.secondary"
-                            >
-                              Sending...
-                            </Typography>
-                          )}
-                          <Typography
-                            variant="caption"
-                            sx={{ display: "block", textAlign: "right" }}
-                          >
-                            {new Date(msg.createdDate).toLocaleString()}
-                          </Typography>
-                        </Stack>
-                      </Paper>
-                      {msg.me && (
-                        <Avatar
+                        {!msg.me && (
+                          <Avatar
+                            src={msg.sender?.avatar}
+                            sx={{
+                              mr: 1,
+                              alignSelf: "flex-end",
+                              width: 32,
+                              height: 32,
+                            }}
+                          />
+                        )}
+                        <Paper
+                          elevation={1}
                           sx={{
-                            ml: 1,
-                            alignSelf: "flex-end",
-                            width: 32,
-                            height: 32,
-                            bgcolor: "#1976d2",
+                            p: 2,
+                            maxWidth: "70%",
+                            backgroundColor,
+                            borderRadius: 2,
+                            opacity: msg.pending ? 0.7 : 1,
                           }}
                         >
-                          You
-                        </Avatar>
-                      )}
-                    </Box>
-                  ))}
+                          <Typography variant="body1">{msg.message}</Typography>
+                          <Stack
+                            direction="row"
+                            spacing={1}
+                            alignItems="center"
+                            justifyContent="flex-end"
+                            sx={{ mt: 1 }}
+                          >
+                            {msg.failed && (
+                              <Typography variant="caption" color="error">
+                                Failed to send
+                              </Typography>
+                            )}
+                            {msg.pending && (
+                              <Typography
+                                variant="caption"
+                                color="text.secondary"
+                              >
+                                Sending...
+                              </Typography>
+                            )}
+                            <Typography
+                              variant="caption"
+                              sx={{ display: "block", textAlign: "right" }}
+                            >
+                              {new Date(msg.createdDate).toLocaleString()}
+                            </Typography>
+                          </Stack>{" "}
+                        </Paper>
+                        {msg.me && (
+                          <Avatar
+                            sx={{
+                              ml: 1,
+                              alignSelf: "flex-end",
+                              width: 32,
+                              height: 32,
+                              bgcolor: "#1976d2",
+                            }}
+                          >
+                            You
+                          </Avatar>
+                        )}
+                      </Box>
+                    );
+                  })}
                 </Box>
               </Box>
               <Box
