@@ -4,6 +4,7 @@ import com.devteria.chat.dto.ApiResponse;
 import com.devteria.chat.dto.request.ChatMessageRequest;
 import com.devteria.chat.dto.response.ChatMessageResponse;
 import com.devteria.chat.service.ChatMessageService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class ChatMessageController {
 
     @PostMapping("/create")
     ApiResponse<ChatMessageResponse> create(
-            @RequestBody @Valid ChatMessageRequest request) {
+            @RequestBody @Valid ChatMessageRequest request) throws JsonProcessingException {
         return ApiResponse.<ChatMessageResponse>builder()
                 .result(chatMessageService.create(request))
                 .build();

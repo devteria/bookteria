@@ -197,7 +197,6 @@ export default function Chat() {
       socketRef.current.on("message", (message) => {
         console.log("New message received:", message);
 
-        /*
         const messageObject = JSON.parse(message);
         console.log("Parsed message object:", messageObject);
 
@@ -205,7 +204,6 @@ export default function Chat() {
         if (messageObject?.conversationId) {
           handleIncomingMessage(messageObject);
         }
-        */
       });
     }
 
