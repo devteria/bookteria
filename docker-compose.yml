@@ -1,7 +1,7 @@
 name: bookteria
 services:
   kafka:
-    image: 'bitnami/kafka:3.8.0'
+    image: 'soldevelo/kafka:3.8.1'
     container_name: kafka
     hostname: kafka
     restart: always
